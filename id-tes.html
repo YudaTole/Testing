@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>🌸𝐎𝐭𝐚𝐤𝐮 𝐂𝐥𝐮𝐛 𝐂𝐫𝐞𝐚𝐭𝐨𝐫🌸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+
+        /* Background Video */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        /* Overlay untuk membuat teks lebih terbaca */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        /* Container utama */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Header dengan foto profil */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            border: none;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Teks transparan */
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            to {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        /* Card produk */
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Tombol */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: linear-gradient(45deg, #128C7E, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-instagram {
+            background: linear-gradient(45deg, #E4405F, #C13584, #833AB4);
+            color: white;
+        }
+
+        .btn-instagram:hover {
+            background: linear-gradient(45deg, #C13584, #E4405F, #833AB4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(228, 64, 95, 0.4);
+        }
+
+        .btn-tiktok {
+            background: linear-gradient(45deg, #000000, #ff0050);
+            color: white;
+        }
+
+        .btn-tiktok:hover {
+            background: linear-gradient(45deg, #ff0050, #000000);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 80, 0.4);
+        }
+
+        .btn-admin {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+        }
+
+        .btn-admin:hover {
+            background: linear-gradient(45deg, #4ECDC4, #FF6B6B);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Social media section */
+        .social-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .social-title {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Features list */
+        .features {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .features-title {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .feature-item {
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-item:before {
+            content: "🌸";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .rule-item {
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .rule-item:before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .product-card {
+                margin: 15px 10px;
+                padding: 20px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+                margin: 8px;
+            }
+            
+            .social-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .product-card {
+                padding: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* Animasi masuk */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Tombol Mute/Unmute */
+        .mute-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .mute-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        @media (max-width: 480px) {
+            .mute-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        /* Visit stats */
+        #visit-stats {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Start Overlay -->
+    <div id="startOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:#000a;display:flex;justify-content:center;align-items:center;flex-direction:column;">
+        <button id="startButton" style="padding:15px 30px;font-size:1.5rem;border:none;border-radius:10px;background:linear-gradient(90deg,#00c6ff,#0072ff);color:#fff;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.4);">▶️ Mulai</button>
+        <p style="color:white;margin-top:20px;font-size:1rem;">Klik tombol untuk memulai dengan suara</p>
+    </div>
+
+    <!-- Background Image -->
+    <div class="background-image"></div>
+
+    <!-- Background Video -->
+    <video autoplay class="video-background" id="backgroundVideo" loop muted playsinline>
+        <source src="https://files.catbox.moe/ncw9rv.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Mute/Unmute Button -->
+    <button class="mute-button" id="muteButton">🔇</button>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Visit Stats -->
+    <div id="visit-stats">
+        Menghitung statistik...
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header fade-in">
+            <img alt="Profile" class="profile-image floating" src="https://files.catbox.moe/vsly1n.jpg"/>
+            <h1 class="title">𝐎𝐭𝐚𝐤𝐮 𝐂𝐥𝐮𝐛 𝐂𝐫𝐞𝐚𝐭𝐨𝐫</h1>
+            <p class="subtitle">Tempat Berkumpul Para Pecinta Anime dan Mencari Teman Baru</p>
+        </div>
+
+        <!-- Tentang Grup -->
+        <div class="product-card fade-in">
+            <h2 class="product-title">🎌 Tentang Grup Kami</h2>
+            <p class="product-description">
+                Selamat datang di grup WhatsApp khusus untuk para pecinta anime! 
+                Di sini kamu bisa berdiskusi tentang anime favorit, berbagi rekomendasi, 
+                dan tentunya mencari teman baru yang memiliki hobi yang sama.
+            </p>
+        </div>
+
+        <!-- Aktivitas Grup -->
+        <div class="features fade-in">
+            <h3 class="features-title">🎯 Apa yang Kita Lakukan?</h3>
+            <div class="feature-item">Diskusi anime terbaru dan klasik</div>
+            <div class="feature-item">Berbagi rekomendasi anime</div>
+            <div class="feature-item">Review anime bersama-sama</div>
+            <div class="feature-item">Sharing fanart dan meme anime</div>
+            <div class="feature-item">Mencari teman dengan hobi yang sama</div>
+            <div class="feature-item">Event nonton bareng (nobar) online</div>
+            <div class="feature-item">Quiz dan games tentang anime</div>
+            <div class="feature-item">Diskusi manga dan light novel</div>
+        </div>
+
+        <!-- Peraturan Grup -->
+        <div class="features fade-in">
+            <h3 class="features-title">📋 Peraturan Grup (WAJIB DIPATUHI!)</h3>
+            <div class="rule-item">Dilarang spam atau flood chat</div>
+            <div class="rule-item">Tidak boleh share konten 18+ atau NSFW</div>
+            <div class="rule-item">Hormati sesama member grup</div>
+            <div class="rule-item">Dilarang promosi tanpa izin admin</div>
+            <div class="rule-item">Gunakan bahasa yang sopan</div>
+            <div class="rule-item">Jangan share spoiler tanpa warning</div>
+            <div class="rule-item">Dilarang bertengkar atau toxic</div>
+            <div class="rule-item">Maksimal 3 peringatan, setelah itu kick</div>
+        </div>
+
+        <!-- Genre Anime yang Dibahas -->
+        <div class="product-card fade-in">
+            <h2 class="product-title">🎭 Genre Anime yang Sering Dibahas</h2>
+            <p class="product-description">
+                <strong>Shonen:</strong> Naruto, One Piece, Dragon Ball, Attack on Titan<br/>
+                <strong>Seinen:</strong> Berserk, Monster, Psycho-Pass<br/>
+                <strong>Shoujo:</strong> Sailor Moon, Fruits Basket, Ouran High School<br/>
+                <strong>Slice of Life:</strong> K-On!, Clannad, Your Name<br/>
+                <strong>Isekai:</strong> Re:Zero, Overlord, That Time I Got Reincarnated<br/>
+                <strong>Romance:</strong> Toradora, Kaguya-sama, Your Lie in April
+            </p>
+        </div>
+
+        <!-- Tombol Aksi -->
+        <div class="social-section fade-in">
+            <h3 class="social-title">🚀 Bergabung dengan Kami!</h3>
+            <div class="social-buttons">
+                <a class="btn btn-whatsapp" href="https://chat.whatsapp.com/LKT1xQ0k14n9QgKGaVly1b" target="_blank">
+                    👥 Gabung Grup WhatsApp
+                </a>
+                <a class="btn btn-admin" href="https://wa.me/6285135673054?text=Assalamualaikum%20bang" target="_blank">
+                    💬 Chat Admin
+                </a>
+                <a class="btn btn-instagram" href="https://whatsapp.com/channel/0029Vb6RNq7Ae5VmORFEoR26" target="_blank">
+                    🌸 Saluran WhatsApp
+                </a>
+                <a class="btn btn-tiktok" href="https://www.tiktok.com/@official_occ.1?_t=ZS-8xuxHc5VdP5&_r=1" target="_blank">
+                    🎵 TikTok
+                </a>
+            </div>
+        </div>
+
+        <!-- Info Tambahan -->
+        <div class="product-card fade-in">
+            <h2 class="product-title">ℹ️ Info Penting</h2>
+            <p class="product-description">
+                Grup ini dibuat untuk memfasilitasi diskusi sehat tentang anime dan membantu 
+                para otaku menemukan teman baru. Kami mengutamakan kenyamanan semua member, 
+                jadi pastikan untuk selalu mengikuti peraturan yang berlaku.
+            </p>
+            <p class="product-description">
+                <strong>Jam Aktif:</strong> 24/7 (Admin online pukul 08:00 - 22:00 WIB)<br/>
+                <strong>Jumlah Member:</strong> 150+ dan terus bertambah!<br/>
+                <strong>Bahasa:</strong> Indonesia (Bahasa Inggris diperbolehkan)
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Hitung durasi kunjungan
+        let startTime = Date.now();
+        let totalVisits = localStorage.getItem('totalVisits');
+        totalVisits = totalVisits ? parseInt(totalVisits) + 1 : 1;
+        localStorage.setItem('totalVisits', totalVisits);
+
+        function updateStats() {
+            const now = Date.now();
+            const duration = Math.floor((now - startTime) / 1000); // detik
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+
+            document.getElementById('visit-stats').innerHTML =
+                `👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateStats, 1000);
+
+        // Start button functionality
+        document.getElementById("startButton").addEventListener("click", function () {
+            const video = document.getElementById("backgroundVideo");
+            const overlay = document.getElementById("startOverlay");
+            const muteButton = document.getElementById("muteButton");
+            
+            video.muted = false;
+            muteButton.textContent = "🔊";
+            
+            video.play().then(() => {
+                overlay.style.display = "none";
+            }).catch(err => {
+                console.error("Playback failed:", err);
+                overlay.style.display = "none";
+            });
+        });
+
+        // Mute/Unmute functionality
+        document.getElementById("muteButton").addEventListener("click", function () {
+            const video = document.getElementById("backgroundVideo");
+            const button = this;
+            
+            if (video.muted) {
+                video.muted = false;
+                button.textContent = "🔊";
+            } else {
+                video.muted = true;
+                button.textContent = "🔇";
+            }
+        });
+    </script>
+</body>
+</html>
+
