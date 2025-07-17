@@ -574,71 +574,7 @@
 </div>
 
 <script>
-function confirmOrder(form) {
-    const name = form.name.value.trim();
-    const durasi = form.durasi.value.trim();
-    const pesan = form.pesan.value.trim() || '-';
-    const message = Halo OmYudz, saya ${name}. Saya ingin sewa BOT dengan durasi ${durasi}. Pesan: ${pesan};
-    const waUrl = https://wa.me/6285135673054?text=${encodeURIComponent(message)};
-    window.open(waUrl, '_blank');
-    return false;
-}
-</script>
-</div>
-
-    <script>
-        // Hitung durasi kunjungan
-        let startTime = Date.now();
-        let totalVisits = localStorage.getItem('totalVisits');
-        totalVisits = totalVisits ? parseInt(totalVisits) + 1 : 1;
-        localStorage.setItem('totalVisits', totalVisits);
-
-        function updateStats() {
-            const now = Date.now();
-            const duration = Math.floor((now - startTime) / 1000); // detik
-            const minutes = Math.floor(duration / 60);
-            const seconds = duration % 60;
-
-            document.getElementById('visit-stats').innerHTML =
-                👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s;
-        }
-
-        setInterval(updateStats, 1000);
-
-        // Start button functionality
-        document.getElementById("startButton").addEventListener("click", function () {
-            const video = document.getElementById("backgroundVideo");
-            const overlay = document.getElementById("startOverlay");
-            const muteButton = document.getElementById("muteButton");
-            
-            video.muted = false;
-            muteButton.textContent = "🔊";
-            
-            video.play().then(() => {
-                overlay.style.display = "none";
-            }).catch(err => {
-                console.error("Playback failed:", err);
-                overlay.style.display = "none";
-            });
-        });
-
-        // Mute/Unmute functionality
-        document.getElementById("muteButton").addEventListener("click", function () {
-            const video = document.getElementById("backgroundVideo");
-            const button = this;
-            
-            if (video.muted) {
-                video.muted = false;
-                button.textContent = "🔊";
-            } else {
-                video.muted = true;
-                button.textContent = "🔇";
-            }
-        });
-    </script>
-
-
-<script>
+document.addEventListener("DOMContentLoaded", function () {
   const video = document.getElementById("backgroundVideo");
   const muteButton = document.getElementById("muteButton");
   const overlay = document.getElementById("startOverlay");
@@ -652,17 +588,20 @@ function confirmOrder(form) {
 
   function updateStats() {
       const now = Date.now();
-      const duration = Math.floor((now - startTime) / 1000); // detik
+      const duration = Math.floor((now - startTime) / 1000);
       const minutes = Math.floor(duration / 60);
       const seconds = duration % 60;
-
-      document.getElementById('visit-stats').innerHTML =
-          👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s;
+      const stats = document.getElementById('visit-stats');
+      if (stats) {
+        stats.innerHTML = 👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s;
+      }
   }
   setInterval(updateStats, 1000);
 
-  // Tombol mulai
+  // Tombol "Mulai"
   if (startButton && overlay) {
+    startButton.style.zIndex = 1000;
+    startButton.style.pointerEvents = 'auto';
     startButton.addEventListener("click", () => {
       if (video) {
         video.muted = false;
@@ -681,13 +620,13 @@ function confirmOrder(form) {
     });
   }
 
-  // Fallback auto-close overlay
+  // Fallback: auto-close overlay
   setTimeout(() => {
     if (overlay && overlay.style.display !== "none") {
       overlay.style.display = "none";
     }
   }, 10000);
+});
 </script>
-
 </body>
 </html>
