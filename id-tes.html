@@ -413,6 +413,17 @@
             z-index: 999;
         }
     </style>
+
+<style>
+.harga-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
+</style>
+
 </head>
 <body>
     <!-- Start Overlay -->
@@ -542,10 +553,38 @@
                 </a>
             </div>
         <div class="bot-showcase fade-in">
-<h3 class="features-title">💲 List Harga BOT</h3>
-<img alt="Tampilan Bot" class="bot-image" src="https://files.catbox.moe/xmu4p4.jpg" width="400px"height="450px">
-        </div>
+<div class="harga-container"><h3 class="features-title">💲 List Harga BOT</h3>
+    <div class="product-description" style="text-align:left;">
+        <div class="rule-item">🔹 1 Minggu: Rp10.000</div>
+        <div class="rule-item">🔸 2 Minggu: Rp15.000</div>
+        <div class="rule-item">💠 1 Bulan: Rp20.000</div>
+        <div class="rule-item">🛡️ Permanen: Rp30.000 + Bonus Setup</div>
     </div>
+    </div></div>
+    
+<!-- Form Order WhatsApp -->
+<div class="product-card fade-in">
+    <h2 class="product-title">📦 Form Order Cepat</h2>
+    <form onsubmit="return confirmOrder(this)">
+        <input type="text" name="name" placeholder="Nama Anda" required style="padding:10px;border-radius:8px;width:100%;margin-bottom:10px;">
+        <input type="text" name="durasi" placeholder="Durasi Sewa (misal: 1 Bulan)" required style="padding:10px;border-radius:8px;width:100%;margin-bottom:10px;">
+        <textarea name="pesan" placeholder="Pesan tambahan (opsional)" style="padding:10px;border-radius:8px;width:100%;height:80px;margin-bottom:10px;"></textarea>
+        <button type="submit" class="btn btn-whatsapp">🚀 Kirim ke WhatsApp</button>
+    </form>
+</div>
+
+<script>
+function confirmOrder(form) {
+    const name = form.name.value.trim();
+    const durasi = form.durasi.value.trim();
+    const pesan = form.pesan.value.trim() || '-';
+    const message = Halo OmYudz, saya ${name}. Saya ingin sewa BOT dengan durasi ${durasi}. Pesan: ${pesan};
+    const waUrl = https://wa.me/6285135673054?text=${encodeURIComponent(message)};
+    window.open(waUrl, '_blank');
+    return false;
+}
+</script>
+</div>
 
     <script>
         // Hitung durasi kunjungan
@@ -561,7 +600,7 @@
             const seconds = duration % 60;
 
             document.getElementById('visit-stats').innerHTML =
-                `👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s`;
+                👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s;
         }
 
         setInterval(updateStats, 1000);
@@ -599,4 +638,3 @@
     </script>
 </body>
 </html>
-
