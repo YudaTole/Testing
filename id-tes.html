@@ -415,19 +415,33 @@
     </style>
 </head>
 <body>
-  
+    <!-- Start Overlay -->
+    <div id="startOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;background:#000a;display:flex;justify-content:center;align-items:center;flex-direction:column;">
+        <button id="startButton" style="padding:15px 30px;font-size:1.5rem;border:none;border-radius:10px;background:linear-gradient(90deg,#00c6ff,#0072ff);color:#fff;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.4);">▶️ Mulai</button>
+        <p style="color:white;margin-top:20px;font-size:1rem;">Klik tombol untuk memulai dengan suara</p>
+    </div>
+
     <!-- Background Image -->
     <div class="background-image"></div>
 
     <!-- Background Video -->
-    <video id="backgroundVideo" autoplay loop muted playsinline>
-    <source src="https://files.catbox.moe/4hn0zl.mp4"type="video/mp4"
+    <video autoplay class="video-background" id="backgroundVideo" loop muted playsinline>
+        <source src="https://files.catbox.moe/4hn9z1.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
     </video>
+
+    <!-- Mute/Unmute Button -->
+    <button class="mute-button" id="muteButton">🔇</button>
 
     <!-- Overlay -->
     <div class="overlay"></div>
 
-   <!-- Main Container -->
+    <!-- Visit Stats -->
+    <div id="visit-stats">
+        Menghitung statistik...
+    </div>
+
+    <!-- Main Container -->
     <div class="container">
         <!-- Header -->
         <div class="header fade-in">
@@ -533,5 +547,55 @@
         </div>
     </div>
 
+    <script>
+        // Hitung durasi kunjungan
+        let startTime = Date.now();
+        let totalVisits = localStorage.getItem('totalVisits');
+        totalVisits = totalVisits ? parseInt(totalVisits) + 1 : 1;
+        localStorage.setItem('totalVisits', totalVisits);
+
+        function updateStats() {
+            const now = Date.now();
+            const duration = Math.floor((now - startTime) / 1000); // detik
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+
+            document.getElementById('visit-stats').innerHTML =
+                👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s;
+        }
+
+        setInterval(updateStats, 1000);
+
+        // Start button functionality
+        document.getElementById("startButton").addEventListener("click", function () {
+            const video = document.getElementById("backgroundVideo");
+            const overlay = document.getElementById("startOverlay");
+            const muteButton = document.getElementById("muteButton");
+            
+            video.muted = false;
+            muteButton.textContent = "🔊";
+            
+            video.play().then(() => {
+                overlay.style.display = "none";
+            }).catch(err => {
+                console.error("Playback failed:", err);
+                overlay.style.display = "none";
+            });
+        });
+
+        // Mute/Unmute functionality
+        document.getElementById("muteButton").addEventListener("click", function () {
+            const video = document.getElementById("backgroundVideo");
+            const button = this;
+            
+            if (video.muted) {
+                video.muted = false;
+                button.textContent = "🔊";
+            } else {
+                video.muted = true;
+                button.textContent = "🔇";
+            }
+        });
+    </script>
 </body>
 </html>
