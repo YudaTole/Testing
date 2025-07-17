@@ -145,21 +145,168 @@
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: bold;
+            text-d<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Penyeweaan dan penjualan BOT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+
+        /* Background Video */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        /* Overlay untuk membuat teks lebih terbaca */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+        
+        /* Container utama */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Header dengan foto profil */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            border: none;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Teks transparan */
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            to {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        /* Card produk */
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Tombol */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-       .btn-whatsapp {
-            background: linear-gradient(45deg, #1877F2, #145DBF, #229ED9);
+        .btn-whatsapp {
+            background: linear-gradient(45deg, #25D366, #128C7E);
             color: white;
         }
 
         .btn-whatsapp:hover {
-            background: linear-gradient(45deg, #145DBF, #1877F2, #229ED9);
+            background: linear-gradient(45deg, #128C7E, #25D366);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(24, 119, 242, 0,4);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
 
         .btn-instagram {
@@ -194,17 +341,26 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
         }
-        
-         .btn-admin1 {
+         .btn-mediafire {
             background: linear-gradient(45deg, #25D366, #128C7E);
             color: white;
         }
 
-        .btn-admin1:hover {
+        .btn-mediafire:hover {
             background: linear-gradient(45deg, #128C7E, #25D366);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
+         .btn-pinterest {
+            background: linear-gradient(45deg, #E4405F, #C13584, #833AB4);
+            color: white;
+        }
+
+        .btn-pinterest:hover {
+            background: linear-gradient(45deg, #833AB4, #E4405F, #C13584);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(228, 64, 95, 0.4);
+         }
 
         /* Social media section */
         .social-section {
@@ -417,7 +573,7 @@
 
     <!-- Background Video -->
     <video autoplay class="video-background" id="backgroundVideo" loop muted playsinline>
-        <source src="https://files.catbox.moe/dpmvl3.mp4" type="video/mp4"/>
+        <source src="https://files.catbox.moe/4hn9z1.mp4" type="video/mp4"/>
         Your browser does not support the video tag.
     </video>
 
@@ -436,59 +592,57 @@
     <div class="container">
         <!-- Header -->
         <div class="header fade-in">
-            <img alt="Profile" class="profile-image floating" src="https://files.catbox.moe/vsly1n.jpg"/>
-            <h1 class="title">𝗢𝗧𝗔𝗞𝗨 𝗖𝗟𝗨𝗕 𝗖𝗥𝗘𝗔𝗧𝗢𝗥</h1>
-            <p class="subtitle">Tempat Berkumpul Para Pecinta Anime dan Mencari Teman Baru</p>
+            <img alt="Profile" class="profile-image floating" src="https://files.catbox.moe/xnaeum.jpg"/>
+            <h1 class="title">Sewa/Beli BOT</h1>
+            <p class="subtitle">Penyewaan BOT dimulai dari 10k aja
+            Dan Bonus SetUp</p>
         </div>
 
         <!-- Tentang Grup -->
         <div class="product-card fade-in">
-            <h2 class="product-title">🎌 Tentang Kami</h2>
+            <h2 class="product-title">🌸 Tentang Kami</h2>
             <p class="product-description">
-                Didirikan Pada "1 Juni 2025", Komunitas Ini Dibangun Dengan Tujuan Menciptakan Ruang Yang Aman,
-                Aktif, Dan Penuh Semangat Untuk Para Penggemar Anime Di Indonesia.
-                Kami Menggabungkan Teknologi Seperti BOT Anime, Sistem Absen Otomatis, Serta Event Interaktif
-                Untuk Memperkuat Interaksi Antar Anggota.
-                Kami Percaya Bahwa Dunia Anime Bukan Sekedar Hobi, Tapi Jembatan Untuk Mempererat Persahabatan.
+               KAMI ADALAH TIM PENGEMBANG YANG FOKUS MENYEDIAKAN BOT ANIME BERKUALITAS TINGGI UNTUK KOMUNITAS WHATS'AAP,
+                DENGAN PENGALAMAN DI BIDANG OTOMASI, AI, DAN KOMUNITAS OTAKU/WIBU, KAMI MENGHADIRKAN BOT YANG TIDAK HANYA PINTAR,
+                TAPI SERU JUGA, INTERAKTIF, DAN PENUH NUANSA ANIME.
+                   
             </p>
         </div>
 
         <!-- Aktivitas Grup -->
         <div class="features fade-in">
-            <h3 class="features-title">🎯 Apa yang Kita Lakukan?</h3>
-            <div class="feature-item">Diskusi anime terbaru dan klasik</div>
-            <div class="feature-item">Berbagi rekomendasi anime</div>
-            <div class="feature-item">Review anime bersama-sama</div>
-            <div class="feature-item">Sharing fanart dan meme anime</div>
-            <div class="feature-item">Mencari teman dengan hobi yang sama</div>
-            <div class="feature-item">Event nonton bareng (nobar) online</div>
-            <div class="feature-item">Quiz dan games tentang anime</div>
-            <div class="feature-item">Diskusi manga dan light novel</div>
+            <h3 class="features-title">🔖 Fitur Unggulan</h3>
+            <div class="feature-item">Menu Ai</div>
+            <div class="feature-item">Intro Otomatis Ketika Ada Yang Join</div>
+            <div class="feature-item">Pencatatan Absensi</div>
+            <div class="feature-item">Cari Waifu Random</div>
+            <div class="feature-item">Ban User</div>
+            <div class="feature-item">Enchange Gambar HD</div>
+            <div class="feature-item">Mini Games</div>
+            <div class="feature-item">Auto Respon & Anti Spam</div>
+            <div class="feature-item">Fitur Nightcore & Audio</div>
+              <div class="feature-item">Download Mp3/Mp4 Dengan Menggunakan Link</div>
         </div>
 
         <!-- Peraturan Grup -->
         <div class="features fade-in">
-            <h3 class="features-title">📋 Peraturan Grup (WAJIB DIPATUHI!)</h3>
-            <div class="rule-item">Wajib Sopan & Santun, (jangan bawa SARA, politik, atau menyinggung personal).</div>
-            <div class="rule-item">Dilarang Spam, (hindari spam pesan, emot, atau link tidak jelas).</div>
-            <div class="rule-item">No Toxic & No Drama, (hindari kata kasar, perdebatan tidak penting, dan provokasi).</div>
-            <div class="rule-item">Dilarang Share Konten Dewasa "18+" Secara Berlebihan, (grup ini bersifat friendly & umum untuk semua usia).</div>
-            <div class="rule-item">Gunakan Fitur BOT Secara Wajar, (jangan spam perintah BOT).</div>
-            <div class="rule-item">Tidak Promosi Tanpa Izin Admin, (mau promosi akun/produk? WA admin dulu).</div>
-            <div class="rule-item">Gunakan Nama & Foto Profil Yang Wajar, (hindari nama yang menghina dan pp yang tidak pantas).</div>
-            <div class="rule-item">Pelanggaran Akan Dikenakan Sanksi, (teguran-kick-banned permanent, sesuai tingkat pelanggaran).</div>
+            <h3 class="features-title">📋 Peraturan!! (WAJIB DIPATUHI!)</h3>
+            <div class="rule-item">Jangan Spam Perintah</div>
+            <div class="rule-item">Gunakan Fitur Sesuai Fungsinya</div>
+            <div class="rule-item">Hargai Sesam Pengguna</div>
+            <div class="rule-item">Akses BOT Hanya Berlaku Selama Masa Sewa Aktif</div>
+            <div class="rule-item">Tidak Boleh Menjual Ulang Atau Menyebarkan Nomer BOT</div>
+            <div class="rule-item">Pelanggaran Berat bisa Menyebabkan BANNED Tanpa REFUND</div>
+            <div class="rule-item">Maksimal 2 Peringatan, Setelah Itu Auto BAN</div>
         </div>
 
         <!-- Genre Anime yang Dibahas -->
         <div class="product-card fade-in">
-            <h2 class="product-title">🎭 Topik Utama</h2>
+            <h2 class="product-title">📍 Info Penting 📍<h2>
             <p class="product-description">
-                <strong>Semua Genre Anime:</strong> action, isekai, romance, slice of life, harem, horror, dll<br/>
-                <strong>Manga & Manhwa:</strong> rekomendasi, diskusi, scan terbaru<br/>
-                <strong>Jejepangan:</strong> budaya jepang, cosplay<br/>
-                <strong>Waifu/Husbando Zone:</strong> battle karakter, edit PP, meme, dll<br/>
-                <strong>Fanart & Nightcore:</strong> share karya editan, musik, dan AMV<br/>
-                <strong>Bot Otaku (AI):</strong> cari waifu, absen, mini games, dll<br/>
+                  <div class="rule-item">Fitur & Sistem Bisa Berubah Sewaktu-waktu</div>
+                  <div class="rule-item">Sewa BOT Akan Mendapatkan Notifikasi Jika Ada Update Penting</div>
+                  <div class="rule-item">Kami Berhak Membatasi Atau Menghentikan Akses Jika Digunakan Seacara Tidak Wajar</div>
             </p>
         </div>
 
@@ -496,65 +650,47 @@
         <div class="social-section fade-in">
             <h3 class="social-title">🚀 Bergabung dengan Kami!</h3>
             <div class="social-buttons">
-                <a class="btn btn-whatsapp" href="https://chat.whatsapp.com/LKT1xQ0k14n9QgKGaVly1b?mode=r_t" target="_blank">
-                    👥 Grup Seleksi
+                <a class="btn btn-whatsapp" href="https://chat.whatsapp.com/KoyrRZ7CXXeEVrZp82L8lB?mode=r_t" target="_blank">
+                    👥 Gabung Grup WhatsApp
                 </a>
-                <a class="btn btn-admin" href="https://whatsapp.com/channel/0029Vb60OvPCsU9Q7cVEnj27" target="_blank">
-                    💬 Saluran || OCC
+                <a class="btn btn-admin" href="https://wa.me/6285135673054?text=Assalamualaikum%20bang" target="_blank">
+                    💬 Chat Admin
                 </a>
-                <a class="btn btn-instagram" href="https://www.mediafire.com/folder/qwj4f7v9h9z7i/Otaku+Club+Creator+||+OCC" target="_blank">
-                    📸 Otaku World
+                <a class="btn btn-instagram" href="https://whatsapp.com/channel/0029Vb6RNq7Ae5VmORFEoR26" target="_blank">
+                    🌸 Saluran WhatsApp
                 </a>
-                <a class="btn btn-tiktok" href="https://www.tiktok.com/@official_occ.1?_t=ZS-8xzuOXmHpn6&_r=1" target="_blank">
+                <a class="btn btn-tiktok" href="https://www.tiktok.com/@gelapdansepi?_t=ZS-8xvDUqkBORM&_r=1" target="_blank">
                     🎵 TikTok
                 </a>
             </div>
-            <div class="bot-showcase fade-in">
-<h3 class="features-title">🎯 List Para Admin</h3>
-                  <a class="btn btn-admin1" href="https://wa.me/6285880057103?text=Assalamualaikum%20bang" target="_blank">
-                     💬 Chat Admin Namus
-                </a>
-                   <a class="btn btn-admin1" href="https://wa.me/6283174910391?text=Assalamualaikum%20bang" target="_blank">
-                    💬 Chat Admin Lenz
-                </a>
-                   <a class="btn btn-admin1" href="https://wa.me/6281318518709?text=Assalamualaikum%20bang" target="_blank">
-                    💬 Chat Admin Vinz
-                </a>
-                   <a class="btn btn-admin1" href="https://wa.me/628385593916?text=Assalamualaikum%20bang" target="_blank">
-                    💬 Chat Admin Kayel
-                </a>
-                 <a class="btn btn-admin1" href="https://wa.me/6285135673054?text=Assalamualaikum%20bang" target="_blank">
-                    💬 Chat Admin  Yudz
-                </a>
-                 <a class="btn btn-admin1" href="https://wa.me/6285845941270?text=Assalamualaikum%20bang" target="_blank">
-                    💬 Chat Admin  Della
-                </a>
-                 <a class="btn btn-admin1" href="https://wa.me/6285783043457?text=Assalamualaikum%20bang" target="_blank">
-                    💬 Chat Admin  Fajar
-                </a>
-                 <a class="btn btn-admin1" href="https://wa.me/6285713077968?text=Assalamualaikum%20bang" target="_blank">
-                    💬 Chat Admin  Shin
-                </a>
-                 <a class="btn btn-admin1" href="https://wa.me/6287757758981?text=Assalamualaikum%20bang" target="_blank">
-                    💬 Chat Admin  Hino
-                </a>
-</div>
-</body>
         </div>
 
         <!-- Info Tambahan -->
         <div class="product-card fade-in">
-            <h2 class="product-title">ℹ️ Info Penting</h2>
+            <h2 class="product-title">ℹ️ Info Tambahan</h2>
             <p class="product-description">
-                Grup ini dibuat untuk memfasilitasi diskusi sehat tentang anime dan membantu 
-                para otaku menemukan teman baru. Kami mengutamakan kenyamanan semua member, 
-                jadi pastikan untuk selalu mengikuti peraturan yang berlaku.
-            </p>
+                <strong>📌</strong>Bot Tidak Menyimpan Chat Pribadi Pengguna<br/>
+                <strong>📌 </strong>Semua Data Akan Direset Secara Berkala <br/>
+        </p>
             <p class="product-description">
                 <strong>Jam Aktif:</strong> 24/7 (Admin online pukul 08:00 - 22:00 WIB)<br/>
-                <strong>Jumlah Member:</strong> 150+ dan terus bertambah!<br/>
                 <strong>Bahasa:</strong> Indonesia (Bahasa Inggris diperbolehkan)
             </p>
+        </div>
+        <div class="bot-showcase fade-in">
+<h3 class="features-title">🎁 Sticker Meme dan Foto Anime</h3>
+        </div>
+         <div class="social-buttons">
+                <a class="btn btn-mediafire" href="https://www.mediafire.com/folder/6x06eaw9hqjty/Paket+Sticker" target="_blank">
+                    🖇️ Sticker Meme Dan Anime
+                </a>
+              <a class="btn btn-pinterest" href="https://www.pinterest.com/bluearchive09/_created" target="_blank">
+                    🌸 Foto Anime
+                </a>
+            </div>
+        <div class="bot-showcase fade-in">
+<h3 class="features-title">💲 List Harga BOT</h3>
+<img alt="Tampilan Bot" class="bot-image" src="https://files.catbox.moe/xmu4p4.jpg" width="400px"height="450px">
         </div>
     </div>
 
@@ -572,7 +708,7 @@
             const seconds = duration % 60;
 
             document.getElementById('visit-stats').innerHTML =
-                👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s;
+                `👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s`;
         }
 
         setInterval(updateStats, 1000);
