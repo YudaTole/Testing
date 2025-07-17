@@ -636,5 +636,30 @@ function confirmOrder(form) {
             }
         });
     </script>
+
+<script>
+  document.getElementById("startButton").addEventListener("click", function () {
+    const video = document.getElementById("backgroundVideo");
+    const overlay = document.getElementById("startOverlay");
+    const muteButton = document.getElementById("muteButton");
+
+    if (video) {
+      video.muted = false;
+      video.play();
+    }
+
+    if (muteButton) muteButton.textContent = "🔊";
+    if (overlay) overlay.style.display = "none";
+  });
+
+  // Fallback: hilangkan overlay setelah 10 detik jika tidak diklik
+  setTimeout(() => {
+    const overlay = document.getElementById("startOverlay");
+    if (overlay && overlay.style.display !== "none") {
+      overlay.style.display = "none";
+    }
+  }, 10000);
+</script>
+
 </body>
 </html>
