@@ -637,24 +637,52 @@ function confirmOrder(form) {
         });
     </script>
 
+
 <script>
-  document.getElementById("startButton").addEventListener("click", function () {
-    const video = document.getElementById("backgroundVideo");
-    const overlay = document.getElementById("startOverlay");
-    const muteButton = document.getElementById("muteButton");
+  const video = document.getElementById("backgroundVideo");
+  const muteButton = document.getElementById("muteButton");
+  const overlay = document.getElementById("startOverlay");
+  const startButton = document.getElementById("startButton");
 
-    if (video) {
-      video.muted = false;
-      video.play();
-    }
+  // Statistik kunjungan
+  let startTime = Date.now();
+  let totalVisits = localStorage.getItem('totalVisits');
+  totalVisits = totalVisits ? parseInt(totalVisits) + 1 : 1;
+  localStorage.setItem('totalVisits', totalVisits);
 
-    if (muteButton) muteButton.textContent = "🔊";
-    if (overlay) overlay.style.display = "none";
-  });
+  function updateStats() {
+      const now = Date.now();
+      const duration = Math.floor((now - startTime) / 1000); // detik
+      const minutes = Math.floor(duration / 60);
+      const seconds = duration % 60;
 
-  // Fallback: hilangkan overlay setelah 10 detik jika tidak diklik
+      document.getElementById('visit-stats').innerHTML =
+          👤 Kunjungan ke ${totalVisits}<br>🕒 Durasi: ${minutes}m ${seconds}s;
+  }
+  setInterval(updateStats, 1000);
+
+  // Tombol mulai
+  if (startButton && overlay) {
+    startButton.addEventListener("click", () => {
+      if (video) {
+        video.muted = false;
+        video.play();
+      }
+      if (muteButton) muteButton.textContent = "🔊";
+      overlay.style.display = "none";
+    });
+  }
+
+  // Tombol mute/unmute
+  if (muteButton && video) {
+    muteButton.addEventListener("click", () => {
+      video.muted = !video.muted;
+      muteButton.textContent = video.muted ? "🔇" : "🔊";
+    });
+  }
+
+  // Fallback auto-close overlay
   setTimeout(() => {
-    const overlay = document.getElementById("startOverlay");
     if (overlay && overlay.style.display !== "none") {
       overlay.style.display = "none";
     }
